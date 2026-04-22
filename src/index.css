@@ -1,96 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* NEXUS//LIFE — Cyberpunk Life Simulator Design System
+   All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core surfaces — deep void */
+    --background: 240 30% 4%;
+    --foreground: 180 100% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 35% 7%;
+    --card-foreground: 180 100% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 40% 6%;
+    --popover-foreground: 180 100% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Neon cyan — primary HUD */
+    --primary: 185 100% 55%;
+    --primary-foreground: 240 40% 5%;
+    --primary-glow: 185 100% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Hot magenta — secondary accent */
+    --secondary: 320 100% 60%;
+    --secondary-foreground: 240 40% 5%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 25% 12%;
+    --muted-foreground: 220 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Electric violet — accent */
+    --accent: 270 95% 65%;
+    --accent-foreground: 240 40% 5%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Toxic lime — success / xp */
+    --success: 100 100% 55%;
+    --success-foreground: 240 40% 5%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Hazard amber — warning */
+    --warning: 45 100% 60%;
+    --warning-foreground: 240 40% 5%;
 
-    --radius: 0.5rem;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --sidebar-background: 0 0% 98%;
+    --border: 270 50% 20%;
+    --input: 240 30% 12%;
+    --ring: 185 100% 55%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --radius: 0.25rem;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Pillar colors — life domains */
+    --pillar-physical: 0 90% 60%;
+    --pillar-financial: 100 100% 55%;
+    --pillar-mental: 270 95% 65%;
+    --pillar-academic: 185 100% 55%;
+    --pillar-social: 320 100% 60%;
+    --pillar-spiritual: 45 100% 60%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(270 95% 15%) 0%, hsl(240 60% 8%) 50%, hsl(185 100% 12%) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(185 100% 55%), hsl(320 100% 60%));
+    --gradient-violet: linear-gradient(135deg, hsl(270 95% 65%), hsl(320 100% 60%));
+    --gradient-cyber: linear-gradient(135deg, hsl(185 100% 55%) 0%, hsl(270 95% 65%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(240 40% 9% / 0.9), hsl(240 35% 6% / 0.95));
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    /* Shadows / glows */
+    --glow-cyan: 0 0 20px hsl(185 100% 55% / 0.6), 0 0 40px hsl(185 100% 55% / 0.3);
+    --glow-magenta: 0 0 20px hsl(320 100% 60% / 0.6), 0 0 40px hsl(320 100% 60% / 0.3);
+    --glow-violet: 0 0 20px hsl(270 95% 65% / 0.6), 0 0 40px hsl(270 95% 65% / 0.3);
+    --glow-lime: 0 0 20px hsl(100 100% 55% / 0.6), 0 0 40px hsl(100 100% 55% / 0.3);
+    --shadow-panel: 0 8px 32px hsl(240 60% 2% / 0.6), inset 0 1px 0 hsl(185 100% 55% / 0.1);
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 240 35% 6%;
+    --sidebar-foreground: 180 100% 92%;
+    --sidebar-primary: 185 100% 55%;
+    --sidebar-primary-foreground: 240 40% 5%;
+    --sidebar-accent: 240 30% 12%;
+    --sidebar-accent-foreground: 180 100% 92%;
+    --sidebar-border: 270 50% 20%;
+    --sidebar-ring: 185 100% 55%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 240 30% 4%;
+    --foreground: 180 100% 92%;
   }
 }
 
@@ -101,5 +100,95 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    background-image:
+      radial-gradient(ellipse at top, hsl(270 95% 15% / 0.6), transparent 60%),
+      radial-gradient(ellipse at bottom right, hsl(185 100% 15% / 0.4), transparent 60%),
+      radial-gradient(ellipse at bottom left, hsl(320 100% 15% / 0.3), transparent 60%);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .text-glow-cyan { text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.4); }
+  .text-glow-magenta { text-shadow: 0 0 10px hsl(var(--secondary) / 0.8), 0 0 20px hsl(var(--secondary) / 0.4); }
+  .text-glow-violet { text-shadow: 0 0 10px hsl(var(--accent) / 0.8), 0 0 20px hsl(var(--accent) / 0.4); }
+  .text-glow-lime { text-shadow: 0 0 10px hsl(var(--success) / 0.8), 0 0 20px hsl(var(--success) / 0.4); }
+
+  .glow-cyan { box-shadow: var(--glow-cyan); }
+  .glow-magenta { box-shadow: var(--glow-magenta); }
+  .glow-violet { box-shadow: var(--glow-violet); }
+  .glow-lime { box-shadow: var(--glow-lime); }
+
+  .panel {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-panel);
+    backdrop-filter: blur(12px);
+  }
+
+  .clip-corner {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+
+  .clip-corner-sm {
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  }
+
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--primary) / 0.03) 2px,
+      hsl(var(--primary) / 0.03) 3px
+    );
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.2); }
+    50% { box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--primary) / 0.4); }
+  }
+  .animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    41.99% { opacity: 1; }
+    42% { opacity: 0.6; }
+    43% { opacity: 1; }
+    47.99% { opacity: 1; }
+    48% { opacity: 0.4; }
+    49% { opacity: 1; }
+  }
+  .animate-flicker { animation: flicker 6s linear infinite; }
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+  }
+  .animate-scan { animation: scan 4s linear infinite; }
+
+  @keyframes float-up {
+    0% { transform: translateY(0) scale(0.95); opacity: 0; }
+    100% { transform: translateY(-30px) scale(1.05); opacity: 0; }
+    30% { opacity: 1; }
+  }
+  .animate-float-up { animation: float-up 1.5s ease-out forwards; }
 }
