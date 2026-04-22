@@ -8,13 +8,13 @@ export default {
     container: {
       center: true,
       padding: "1.5rem",
-      screens: { "2xl": "1400px" },
+      screens: { "2xl": "1536px" },
     },
     extend: {
       fontFamily: {
-        display: ["Orbitron", "sans-serif"],
-        sans: ["Rajdhani", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        display: ["Cinzel", "serif"],
+        serif: ["Cormorant Garamond", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -59,13 +59,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        pillar: {
-          physical: "hsl(var(--pillar-physical))",
-          financial: "hsl(var(--pillar-financial))",
-          mental: "hsl(var(--pillar-mental))",
-          academic: "hsl(var(--pillar-academic))",
-          social: "hsl(var(--pillar-social))",
-          spiritual: "hsl(var(--pillar-spiritual))",
+        attr: {
+          physical: "hsl(var(--attr-physical))",
+          financial: "hsl(var(--attr-financial))",
+          mental: "hsl(var(--attr-mental))",
+          academic: "hsl(var(--attr-academic))",
+          social: "hsl(var(--attr-social))",
+          spiritual: "hsl(var(--attr-spiritual))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -84,10 +84,11 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       backgroundImage: {
-        "gradient-hero": "var(--gradient-hero)",
-        "gradient-neon": "var(--gradient-neon)",
-        "gradient-violet": "var(--gradient-violet)",
-        "gradient-cyber": "var(--gradient-cyber)",
+        "gradient-gold": "var(--gradient-gold)",
+        "gradient-ember": "var(--gradient-ember)",
+        "gradient-card": "var(--gradient-card)",
+        "gradient-panel": "var(--gradient-panel)",
+        "gradient-overlay": "var(--gradient-overlay)",
       },
       keyframes: {
         "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },
