@@ -1,95 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* NEXUS//LIFE — Cyberpunk Life Simulator Design System
+/* LIFE LEGEND — Fantasy RPG Self-Development Design System
    All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* Core surfaces — deep void */
-    --background: 240 30% 4%;
-    --foreground: 180 100% 92%;
+    /* Core surfaces — deep midnight */
+    --background: 224 35% 7%;
+    --foreground: 38 35% 88%;
 
-    --card: 240 35% 7%;
-    --card-foreground: 180 100% 92%;
+    --card: 224 30% 10%;
+    --card-foreground: 38 35% 88%;
 
-    --popover: 240 40% 6%;
-    --popover-foreground: 180 100% 92%;
+    --popover: 224 35% 8%;
+    --popover-foreground: 38 35% 88%;
 
-    /* Neon cyan — primary HUD */
-    --primary: 185 100% 55%;
-    --primary-foreground: 240 40% 5%;
-    --primary-glow: 185 100% 70%;
+    /* Royal gold — primary */
+    --primary: 42 65% 58%;
+    --primary-foreground: 224 40% 8%;
+    --primary-glow: 42 80% 70%;
 
-    /* Hot magenta — secondary accent */
-    --secondary: 320 100% 60%;
-    --secondary-foreground: 240 40% 5%;
+    /* Antique parchment — secondary */
+    --secondary: 38 25% 75%;
+    --secondary-foreground: 224 40% 8%;
 
-    --muted: 240 25% 12%;
-    --muted-foreground: 220 20% 65%;
+    --muted: 224 20% 16%;
+    --muted-foreground: 38 15% 60%;
 
-    /* Electric violet — accent */
-    --accent: 270 95% 65%;
-    --accent-foreground: 240 40% 5%;
+    /* Mystic ember — accent */
+    --accent: 24 75% 55%;
+    --accent-foreground: 224 40% 8%;
 
-    /* Toxic lime — success / xp */
-    --success: 100 100% 55%;
-    --success-foreground: 240 40% 5%;
+    /* Forest jade — success */
+    --success: 145 50% 50%;
+    --success-foreground: 224 40% 8%;
 
-    /* Hazard amber — warning */
-    --warning: 45 100% 60%;
-    --warning-foreground: 240 40% 5%;
+    /* Torchlight — warning */
+    --warning: 32 90% 58%;
+    --warning-foreground: 224 40% 8%;
 
-    --destructive: 0 100% 60%;
+    --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 270 50% 20%;
-    --input: 240 30% 12%;
-    --ring: 185 100% 55%;
+    --border: 224 25% 18%;
+    --input: 224 25% 14%;
+    --ring: 42 65% 58%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    /* Pillar colors — life domains */
-    --pillar-physical: 0 90% 60%;
-    --pillar-financial: 100 100% 55%;
-    --pillar-mental: 270 95% 65%;
-    --pillar-academic: 185 100% 55%;
-    --pillar-social: 320 100% 60%;
-    --pillar-spiritual: 45 100% 60%;
+    /* Attribute colors — life domains */
+    --attr-physical: 0 70% 58%;
+    --attr-financial: 42 80% 55%;
+    --attr-mental: 220 75% 65%;
+    --attr-academic: 280 55% 65%;
+    --attr-social: 145 50% 55%;
+    --attr-spiritual: 180 55% 55%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(270 95% 15%) 0%, hsl(240 60% 8%) 50%, hsl(185 100% 12%) 100%);
-    --gradient-neon: linear-gradient(90deg, hsl(185 100% 55%), hsl(320 100% 60%));
-    --gradient-violet: linear-gradient(135deg, hsl(270 95% 65%), hsl(320 100% 60%));
-    --gradient-cyber: linear-gradient(135deg, hsl(185 100% 55%) 0%, hsl(270 95% 65%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(240 40% 9% / 0.9), hsl(240 35% 6% / 0.95));
+    --gradient-gold: linear-gradient(90deg, hsl(42 70% 45%), hsl(42 85% 65%), hsl(42 70% 45%));
+    --gradient-ember: linear-gradient(135deg, hsl(24 75% 55%), hsl(42 80% 60%));
+    --gradient-card: linear-gradient(160deg, hsl(224 30% 12% / 0.95), hsl(224 35% 8% / 0.95));
+    --gradient-panel: linear-gradient(180deg, hsl(224 30% 11%), hsl(224 35% 8%));
+    --gradient-overlay: linear-gradient(180deg, hsl(224 35% 7% / 0.2) 0%, hsl(224 35% 7% / 0.95) 100%);
 
     /* Shadows / glows */
-    --glow-cyan: 0 0 20px hsl(185 100% 55% / 0.6), 0 0 40px hsl(185 100% 55% / 0.3);
-    --glow-magenta: 0 0 20px hsl(320 100% 60% / 0.6), 0 0 40px hsl(320 100% 60% / 0.3);
-    --glow-violet: 0 0 20px hsl(270 95% 65% / 0.6), 0 0 40px hsl(270 95% 65% / 0.3);
-    --glow-lime: 0 0 20px hsl(100 100% 55% / 0.6), 0 0 40px hsl(100 100% 55% / 0.3);
-    --shadow-panel: 0 8px 32px hsl(240 60% 2% / 0.6), inset 0 1px 0 hsl(185 100% 55% / 0.1);
+    --shadow-gold: 0 0 24px hsl(42 80% 55% / 0.3), 0 0 48px hsl(42 80% 55% / 0.15);
+    --shadow-panel: 0 8px 32px hsl(224 50% 2% / 0.6), inset 0 1px 0 hsl(42 65% 58% / 0.08);
+    --shadow-deep: 0 20px 60px hsl(224 50% 2% / 0.7);
 
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 240 35% 6%;
-    --sidebar-foreground: 180 100% 92%;
-    --sidebar-primary: 185 100% 55%;
-    --sidebar-primary-foreground: 240 40% 5%;
-    --sidebar-accent: 240 30% 12%;
-    --sidebar-accent-foreground: 180 100% 92%;
-    --sidebar-border: 270 50% 20%;
-    --sidebar-ring: 185 100% 55%;
+    --sidebar-background: 224 35% 6%;
+    --sidebar-foreground: 38 25% 75%;
+    --sidebar-primary: 42 65% 58%;
+    --sidebar-primary-foreground: 224 40% 8%;
+    --sidebar-accent: 224 30% 12%;
+    --sidebar-accent-foreground: 42 65% 70%;
+    --sidebar-border: 224 25% 14%;
+    --sidebar-ring: 42 65% 58%;
   }
 
   .dark {
-    --background: 240 30% 4%;
-    --foreground: 180 100% 92%;
+    --background: 224 35% 7%;
+    --foreground: 38 35% 88%;
   }
 }
 
@@ -100,95 +98,109 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Rajdhani', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     background-image:
-      radial-gradient(ellipse at top, hsl(270 95% 15% / 0.6), transparent 60%),
-      radial-gradient(ellipse at bottom right, hsl(185 100% 15% / 0.4), transparent 60%),
-      radial-gradient(ellipse at bottom left, hsl(320 100% 15% / 0.3), transparent 60%);
+      radial-gradient(ellipse at top right, hsl(42 65% 30% / 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom left, hsl(24 75% 25% / 0.08), transparent 50%);
     background-attachment: fixed;
     min-height: 100vh;
   }
 
   h1, h2, h3, h4, .font-display {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.02em;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.01em;
   }
 
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+  .font-serif {
+    font-family: 'Cormorant Garamond', serif;
   }
 }
 
 @layer utilities {
-  .text-glow-cyan { text-shadow: 0 0 10px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.4); }
-  .text-glow-magenta { text-shadow: 0 0 10px hsl(var(--secondary) / 0.8), 0 0 20px hsl(var(--secondary) / 0.4); }
-  .text-glow-violet { text-shadow: 0 0 10px hsl(var(--accent) / 0.8), 0 0 20px hsl(var(--accent) / 0.4); }
-  .text-glow-lime { text-shadow: 0 0 10px hsl(var(--success) / 0.8), 0 0 20px hsl(var(--success) / 0.4); }
-
-  .glow-cyan { box-shadow: var(--glow-cyan); }
-  .glow-magenta { box-shadow: var(--glow-magenta); }
-  .glow-violet { box-shadow: var(--glow-violet); }
-  .glow-lime { box-shadow: var(--glow-lime); }
+  .text-gold { color: hsl(var(--primary)); }
+  .text-glow-gold {
+    text-shadow: 0 0 12px hsl(var(--primary) / 0.6), 0 0 24px hsl(var(--primary) / 0.3);
+  }
 
   .panel {
     background: var(--gradient-card);
     border: 1px solid hsl(var(--border));
     box-shadow: var(--shadow-panel);
-    backdrop-filter: blur(12px);
   }
 
-  .clip-corner {
-    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  .panel-elevated {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    box-shadow: var(--shadow-deep), inset 0 1px 0 hsl(var(--primary) / 0.1);
   }
 
-  .clip-corner-sm {
-    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  .gold-border {
+    border: 1px solid hsl(var(--primary) / 0.35);
   }
 
-  .scanlines {
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      hsl(var(--primary) / 0.03) 2px,
-      hsl(var(--primary) / 0.03) 3px
-    );
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
   }
 
-  .grid-bg {
-    background-image:
-      linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px);
-    background-size: 40px 40px;
+  .ornate-corner::before,
+  .ornate-corner::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid hsl(var(--primary) / 0.6);
+  }
+  .ornate-corner::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .ornate-corner::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
   }
 
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.2); }
-    50% { box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--primary) / 0.4); }
+  @keyframes flame {
+    0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
+    50% { transform: scale(1.08) rotate(2deg); opacity: 1; }
   }
-  .animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    41.99% { opacity: 1; }
-    42% { opacity: 0.6; }
-    43% { opacity: 1; }
-    47.99% { opacity: 1; }
-    48% { opacity: 0.4; }
-    49% { opacity: 1; }
-  }
-  .animate-flicker { animation: flicker 6s linear infinite; }
-
-  @keyframes scan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(200%); }
-  }
-  .animate-scan { animation: scan 4s linear infinite; }
+  .animate-flame { animation: flame 2s ease-in-out infinite; }
 
   @keyframes float-up {
     0% { transform: translateY(0) scale(0.95); opacity: 0; }
-    100% { transform: translateY(-30px) scale(1.05); opacity: 0; }
-    30% { opacity: 1; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-40px) scale(1.05); opacity: 0; }
   }
   .animate-float-up { animation: float-up 1.5s ease-out forwards; }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .text-shimmer {
+    background: linear-gradient(90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-glow)) 25%,
+      hsl(38 80% 85%) 50%,
+      hsl(var(--primary-glow)) 75%,
+      hsl(var(--primary)) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.4); }
 }
