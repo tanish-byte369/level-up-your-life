@@ -126,12 +126,25 @@
     background: var(--gradient-card);
     border: 1px solid hsl(var(--border));
     box-shadow: var(--shadow-panel);
+    position: relative;
   }
 
   .panel-elevated {
     background: var(--gradient-card);
-    border: 1px solid hsl(var(--primary) / 0.2);
-    box-shadow: var(--shadow-deep), inset 0 1px 0 hsl(var(--primary) / 0.1);
+    border: 1px solid hsl(var(--primary) / 0.25);
+    box-shadow: var(--shadow-deep), inset 0 1px 0 hsl(var(--primary) / 0.14);
+    position: relative;
+  }
+
+  .panel-elevated::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      radial-gradient(circle at top left, hsl(var(--primary) / 0.08), transparent 40%),
+      radial-gradient(circle at bottom right, hsl(var(--accent) / 0.06), transparent 50%);
   }
 
   .gold-border {
@@ -140,6 +153,25 @@
 
   .gold-divider {
     height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.6), transparent);
+  }
+
+  /* Rune divider — a styled horizontal rule with a center glyph */
+  .rune-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: hsl(var(--primary) / 0.8);
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .rune-divider::before,
+  .rune-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
     background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
   }
 
@@ -147,9 +179,10 @@
   .ornate-corner::after {
     content: '';
     position: absolute;
-    width: 14px;
-    height: 14px;
-    border: 1px solid hsl(var(--primary) / 0.6);
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid hsl(var(--primary) / 0.7);
+    pointer-events: none;
   }
   .ornate-corner::before {
     top: -1px;
@@ -162,6 +195,66 @@
     right: -1px;
     border-left: none;
     border-top: none;
+  }
+
+  /* Four-corner ornaments */
+  .ornate-frame {
+    position: relative;
+  }
+  .ornate-frame::before,
+  .ornate-frame::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid hsl(var(--primary) / 0.75);
+    pointer-events: none;
+  }
+  .ornate-frame::before {
+    top: 6px; left: 6px;
+    border-right: none; border-bottom: none;
+  }
+  .ornate-frame::after {
+    bottom: 6px; right: 6px;
+    border-left: none; border-top: none;
+  }
+  .ornate-frame > .ornate-tr,
+  .ornate-frame > .ornate-bl {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid hsl(var(--primary) / 0.75);
+    pointer-events: none;
+  }
+  .ornate-frame > .ornate-tr {
+    top: 6px; right: 6px;
+    border-left: none; border-bottom: none;
+  }
+  .ornate-frame > .ornate-bl {
+    bottom: 6px; left: 6px;
+    border-right: none; border-top: none;
+  }
+
+  .bg-parchment {
+    background-image:
+      linear-gradient(160deg, hsl(224 30% 11% / 0.92), hsl(224 35% 7% / 0.96)),
+      radial-gradient(circle at 20% 10%, hsl(42 65% 30% / 0.18), transparent 40%),
+      radial-gradient(circle at 80% 90%, hsl(24 75% 25% / 0.14), transparent 50%);
+  }
+
+  .btn-gold {
+    background: var(--gradient-ember);
+    color: hsl(var(--primary-foreground));
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 0 4px 20px hsl(var(--primary) / 0.3), inset 0 1px 0 hsl(42 80% 85% / 0.3);
+    transition: var(--transition-smooth);
+  }
+  .btn-gold:hover {
+    box-shadow: 0 6px 28px hsl(var(--primary) / 0.5), inset 0 1px 0 hsl(42 80% 85% / 0.4);
+    transform: translateY(-1px);
   }
 
   @keyframes flame {
