@@ -12,9 +12,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Cinzel", "serif"],
-        serif: ["Cormorant Garamond", "serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Fraunces", "serif"],
+        serif: ["Fraunces", "serif"],
+        sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -59,13 +59,19 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        attr: {
-          physical: "hsl(var(--attr-physical))",
-          financial: "hsl(var(--attr-financial))",
-          mental: "hsl(var(--attr-mental))",
-          academic: "hsl(var(--attr-academic))",
-          social: "hsl(var(--attr-social))",
-          spiritual: "hsl(var(--attr-spiritual))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          foreground: "hsl(var(--gold-foreground))",
+        },
+        cat: {
+          health: "hsl(var(--cat-health))",
+          career: "hsl(var(--cat-career))",
+          finance: "hsl(var(--cat-finance))",
+          learning: "hsl(var(--cat-learning))",
+          relationships: "hsl(var(--cat-relationships))",
+          adventure: "hsl(var(--cat-adventure))",
+          creative: "hsl(var(--cat-creative))",
+          wellness: "hsl(var(--cat-wellness))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
