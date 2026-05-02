@@ -89,6 +89,9 @@ export default {
         "gradient-card": "var(--gradient-card)",
         "gradient-panel": "var(--gradient-panel)",
         "gradient-overlay": "var(--gradient-overlay)",
+        "gradient-dream": "var(--gradient-dream)",
+        "gradient-sunset": "var(--gradient-sunset)",
+        "gradient-aurora": "var(--gradient-aurora)",
       },
       keyframes: {
         "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },
