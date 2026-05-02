@@ -112,21 +112,19 @@ export function useGame() {
 
   // ---- Goals ----
   const addGoal = useCallback((g: Omit<Goal, "id" | "createdAt" | "progress" | "milestones"> & { milestones?: string[] }) => {
-    setState((s) => ({
-      ...s,
-      goals: [
-        {
-          id: `g-${Date.now()}`,
-          createdAt: Date.now(),
-          progress: 0,
-          milestones: (g.milestones ?? ["Get started", "Halfway", "Almost there", "Complete"]).map((label, i) => ({
-            id: `m${i}`, label, done: false,
-          })),
-          ...g,
-        },
-        ...s.goals,
-      ],
-    }));
+    setState((s) => {
+      const { milestones: msLabels, ...rest } = g;
+      const newGoal: Goal = {
+        id: `g-${Date.now()}`,
+        createdAt: Date.now(),
+        progress: 0,
+        milestones: (msLabels ?? ["Get started", "Halfway", "Almost there", "Complete"]).map((label, i) => ({
+          id: `m${i}`, label, done: false,
+        })),
+        ...rest,
+      };
+      return { ...s, goals: [newGoal, ...s.goals] };
+    });
   }, []);
 
   const removeGoal = useCallback((id: string) => {
