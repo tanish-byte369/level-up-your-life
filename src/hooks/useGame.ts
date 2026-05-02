@@ -1,9 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { SaveState, PillarKey, Quest, STARTER_QUESTS, todayKey } from "@/lib/game";
+import { Goal, Story, Partner, STARTER_GOALS, STARTER_STORIES, STARTER_PARTNERS } from "@/lib/dreamtypes";
 
-const STORAGE_KEY = "nexus-life-save-v1";
+const STORAGE_KEY = "life-legend-save-v2";
 
-function freshState(name = "OPERATOR"): SaveState {
+interface ExtraState {
+  goals: Goal[];
+  stories: Story[];
+  partners: Partner[];
+}
+
+type FullState = SaveState & ExtraState;
+
+function freshState(name = "HERO"): FullState {
   return {
     version: 1,
     operatorName: name,
@@ -16,28 +25,39 @@ function freshState(name = "OPERATOR"): SaveState {
     lastResetDay: todayKey(),
     streakDays: 0,
     lastActiveDay: "",
+    goals: STARTER_GOALS,
+    stories: STARTER_STORIES,
+    partners: STARTER_PARTNERS,
   };
 }
 
-function loadState(): SaveState {
+function loadState(): FullState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return freshState();
-    const parsed = JSON.parse(raw) as SaveState;
-    // Daily reset
+    const parsed = JSON.parse(raw) as Partial<FullState>;
+    const base = freshState();
+    const merged: FullState = {
+      ...base,
+      ...parsed,
+      pillarXP: { ...base.pillarXP, ...(parsed.pillarXP || {}) },
+      goals: parsed.goals ?? base.goals,
+      stories: parsed.stories ?? base.stories,
+      partners: parsed.partners ?? base.partners,
+    };
     const today = todayKey();
-    if (parsed.lastResetDay !== today) {
-      parsed.completedToday = [];
-      parsed.lastResetDay = today;
+    if (merged.lastResetDay !== today) {
+      merged.completedToday = [];
+      merged.lastResetDay = today;
     }
-    return parsed;
+    return merged;
   } catch {
     return freshState();
   }
 }
 
 export function useGame() {
-  const [state, setState] = useState<SaveState>(() => loadState());
+  const [state, setState] = useState<FullState>(() => loadState());
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -65,7 +85,7 @@ export function useGame() {
         totalXP: s.totalXP + quest.xp,
         pillarXP: { ...s.pillarXP, [quest.pillar]: s.pillarXP[quest.pillar] + quest.xp },
         completedToday: [...s.completedToday, quest.id],
-        log: [{ questId: quest.id, pillar: quest.pillar, xp: quest.xp, at: Date.now(), title: quest.title }, ...s.log].slice(0, 100),
+        log: [{ questId: quest.id, pillar: quest.pillar, xp: quest.xp, at: Date.now(), title: quest.title }, ...s.log].slice(0, 200),
         lastActiveDay: today,
         streakDays: newStreak,
       };
@@ -73,10 +93,7 @@ export function useGame() {
   }, []);
 
   const addCustomQuest = useCallback((q: Omit<Quest, "id">) => {
-    setState((s) => ({
-      ...s,
-      customQuests: [...s.customQuests, { ...q, id: `c-${Date.now()}` }],
-    }));
+    setState((s) => ({ ...s, customQuests: [...s.customQuests, { ...q, id: `c-${Date.now()}` }] }));
   }, []);
 
   const removeCustomQuest = useCallback((id: string) => {
@@ -84,20 +101,85 @@ export function useGame() {
   }, []);
 
   const setOperatorName = useCallback((name: string) => {
-    setState((s) => ({ ...s, operatorName: name.trim() || "OPERATOR" }));
+    setState((s) => ({ ...s, operatorName: name.trim() || "HERO" }));
   }, []);
 
   const resetGame = useCallback(() => {
-    if (confirm("WIPE SAVE? All progress will be erased. This cannot be undone.")) {
+    if (confirm("Reset your saga? All progress will be erased.")) {
       setState(freshState(state.operatorName));
     }
   }, [state.operatorName]);
 
-  const adjustPillarXP = useCallback((pillar: PillarKey, delta: number) => {
+  // ---- Goals ----
+  const addGoal = useCallback((g: Omit<Goal, "id" | "createdAt" | "progress" | "milestones"> & { milestones?: string[] }) => {
+    setState((s) => {
+      const { milestones: msLabels, ...rest } = g;
+      const newGoal: Goal = {
+        id: `g-${Date.now()}`,
+        createdAt: Date.now(),
+        progress: 0,
+        milestones: (msLabels ?? ["Get started", "Halfway", "Almost there", "Complete"]).map((label, i) => ({
+          id: `m${i}`, label, done: false,
+        })),
+        ...rest,
+      };
+      return { ...s, goals: [newGoal, ...s.goals] };
+    });
+  }, []);
+
+  const removeGoal = useCallback((id: string) => {
+    setState((s) => ({ ...s, goals: s.goals.filter((g) => g.id !== id) }));
+  }, []);
+
+  const toggleMilestone = useCallback((goalId: string, mid: string) => {
+    setState((s) => {
+      const goals = s.goals.map((g) => {
+        if (g.id !== goalId) return g;
+        const milestones = g.milestones.map((m) => (m.id === mid ? { ...m, done: !m.done } : m));
+        const progress = Math.round((milestones.filter((m) => m.done).length / milestones.length) * 100);
+        return { ...g, milestones, progress };
+      });
+      const goal = goals.find((g) => g.id === goalId);
+      const wasDone = s.goals.find((g) => g.id === goalId)?.milestones.find((m) => m.id === mid)?.done;
+      // award XP for new milestone completion
+      let bonus = 0;
+      if (goal && !wasDone) bonus = 50;
+      return {
+        ...s,
+        goals,
+        totalXP: s.totalXP + bonus,
+        pillarXP: goal && bonus
+          ? { ...s.pillarXP, [goal.pillar]: s.pillarXP[goal.pillar] + bonus }
+          : s.pillarXP,
+      };
+    });
+  }, []);
+
+  // ---- Stories ----
+  const cheerStory = useCallback((id: string) => {
     setState((s) => ({
       ...s,
-      totalXP: Math.max(0, s.totalXP + delta),
-      pillarXP: { ...s.pillarXP, [pillar]: Math.max(0, s.pillarXP[pillar] + delta) },
+      stories: s.stories.map((st) =>
+        st.id === id ? { ...st, cheered: !st.cheered, cheers: st.cheers + (st.cheered ? -1 : 1) } : st
+      ),
+    }));
+  }, []);
+
+  const addStory = useCallback((title: string, body: string, pillar: PillarKey) => {
+    setState((s) => ({
+      ...s,
+      stories: [
+        { id: `s-${Date.now()}`, author: s.operatorName, title, body, pillar, cheers: 1, cheered: true, at: Date.now() },
+        ...s.stories,
+      ],
+    }));
+  }, []);
+
+  // ---- Partners ----
+  const togglePartner = useCallback((id: string) => {
+    setState((s) => ({
+      ...s,
+      partners: s.partners.map((p) => (p.id === id ? { ...p, matched: !p.matched } : p)),
     }));
   }, []);
 
@@ -109,6 +191,11 @@ export function useGame() {
     removeCustomQuest,
     setOperatorName,
     resetGame,
-    adjustPillarXP,
+    addGoal,
+    removeGoal,
+    toggleMilestone,
+    cheerStory,
+    addStory,
+    togglePartner,
   };
 }

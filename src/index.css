@@ -53,13 +53,20 @@
 
     --radius: 0.5rem;
 
-    /* Attribute colors — life domains */
-    --attr-physical: 0 70% 58%;
-    --attr-financial: 42 80% 55%;
-    --attr-mental: 220 75% 65%;
-    --attr-academic: 280 55% 65%;
-    --attr-social: 145 50% 55%;
-    --attr-spiritual: 180 55% 55%;
+    /* Attribute colors — DreamDeck inspirational palette
+       Sunset orange · Deep violet · Bright teal · Golden yellow · Coral · Magenta */
+    --attr-physical: 14 88% 60%;     /* sunset orange */
+    --attr-financial: 45 95% 58%;    /* golden yellow */
+    --attr-mental: 175 75% 50%;      /* bright teal */
+    --attr-academic: 268 70% 65%;    /* deep violet */
+    --attr-social: 340 80% 62%;      /* magenta/coral */
+    --attr-spiritual: 195 85% 60%;   /* sky cyan */
+
+    /* Inspirational accents (DreamDeck) */
+    --insp-sunset: 14 88% 60%;
+    --insp-violet: 268 70% 60%;
+    --insp-teal: 175 75% 50%;
+    --insp-gold: 45 95% 58%;
 
     /* Gradients */
     --gradient-gold: linear-gradient(90deg, hsl(42 70% 45%), hsl(42 85% 65%), hsl(42 70% 45%));
@@ -67,6 +74,9 @@
     --gradient-card: linear-gradient(160deg, hsl(224 30% 12% / 0.95), hsl(224 35% 8% / 0.95));
     --gradient-panel: linear-gradient(180deg, hsl(224 30% 11%), hsl(224 35% 8%));
     --gradient-overlay: linear-gradient(180deg, hsl(224 35% 7% / 0.2) 0%, hsl(224 35% 7% / 0.95) 100%);
+    --gradient-dream: linear-gradient(135deg, hsl(14 88% 60%), hsl(340 80% 62%) 35%, hsl(268 70% 60%) 70%, hsl(175 75% 50%));
+    --gradient-sunset: linear-gradient(135deg, hsl(14 88% 60%), hsl(45 95% 58%));
+    --gradient-aurora: linear-gradient(135deg, hsl(268 70% 60%), hsl(175 75% 50%));
 
     /* Shadows / glows */
     --shadow-gold: 0 0 24px hsl(42 80% 55% / 0.3), 0 0 48px hsl(42 80% 55% / 0.15);
